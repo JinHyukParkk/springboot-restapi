@@ -16,7 +16,7 @@ public class EventTest {
     }
 
     @Test
-    public void JavaBean() {
+    public void javaBean() {
         // Given
         String name = "Event";
         String spring = "Spring";
@@ -29,5 +29,12 @@ public class EventTest {
         // Then
         assertThat(event.getName()).isEqualTo(name);
         assertThat(event.getDescription()).isEqualTo(spring);
+    }
+
+    @Test
+    public void aseertJTest() {
+        assertThat("123").isEqualTo("123")
+                                .contains("2")
+                                .endsWith("3");
     }
 }
