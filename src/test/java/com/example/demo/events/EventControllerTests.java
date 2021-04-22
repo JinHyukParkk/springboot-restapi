@@ -21,7 +21,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
-//@WebMvcTest
 @SpringBootTest
 @AutoConfigureMockMvc
 public class EventControllerTests {
