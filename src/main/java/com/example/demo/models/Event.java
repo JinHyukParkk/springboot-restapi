@@ -1,4 +1,4 @@
-package com.example.demo.events;
+package com.example.demo.models;
 
 import lombok.*;
 
@@ -27,6 +27,7 @@ public class Event {
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus = EventStatus.DRAFT;
 
+    // free, offline 여부 체크
     public void update() {
         // Updaste free
         if (this.basePrice == 0 && this.maxPrice == 0) {
@@ -42,4 +43,11 @@ public class Event {
             this.offline = true;
         }
     }
+    // ######################################
+    // # basePrice    maxPrice      설명     #
+    // #     0          100       선착순 등록  #
+    // #     0           0          무료     #
+    // #    100          0        무제한 경매  #
+    // #    100         200      제한가 선착순  #
+    // ######################################
 }

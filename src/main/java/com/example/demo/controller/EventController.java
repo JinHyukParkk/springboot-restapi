@@ -1,5 +1,9 @@
-package com.example.demo.events;
+package com.example.demo.controller;
 
+import com.example.demo.models.Event;
+import com.example.demo.dto.EventDto;
+import com.example.demo.repository.EventRepository;
+import com.example.demo.events.EventValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +47,7 @@ public class EventController {
         }
 
         Event event = modelMapper.map(eventDto, Event.class);
-        event.update(); // 이벤트가 유료인지 무료인지
+        event.update();
         Event newEvent = this.eventRepository.save(event);
         URI createdUri = linkTo(EventController.class).slash(newEvent.getId()).toUri();
         return ResponseEntity.created(createdUri).body(event);

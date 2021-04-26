@@ -1,9 +1,14 @@
 package com.example.demo.events;
 
+import com.example.demo.models.Event;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RunWith(JUnitParamsRunner.class)
 public class EventTest {
 
     @Test
@@ -38,31 +43,36 @@ public class EventTest {
                                 .endsWith("3");
     }
 
+
+    private Object[] parametersForTestFree() {   // parametersFor[테스트 메소드명] 컨벤션
+        return new Object[] {
+                new Object[] {0, 0, true},
+                new Object[] {100, 0, false},
+                new Object[] {0, 100, false},
+                new Object[] {100, 200, false}
+        };
+    }
     @Test
-    public void testFree() {
+//    @Parameters({
+//            "0, 0, true",
+//            "100, 0 , false",
+//            "0, 100, false"
+//    })
+//    @Parameters(method = "parametersForTestFree")
+    @Parameters
+    public void testFree(int basePrice, int maxPrice, boolean isFree) {
         // Given
         Event event = Event.builder()
-                .basePrice(0)
-                .maxPrice(0)
+                .basePrice(basePrice)
+                .maxPrice(maxPrice)
                 .build();
+        // JunitParam 을 사용해서 소스줄임
 
         // When
         event.update();
 
         // Then
-        assertThat(event.isFree()).isTrue();
-
-        // Given
-        event = Event.builder()
-                .basePrice(0)
-                .maxPrice(100)
-                .build();
-
-        // When
-        event.update();
-
-        // Then
-        assertThat(event.isFree()).isTrue();
+        assertThat(event.isFree()).isEqualTo(isFree);
     }
 
     @Test

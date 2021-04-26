@@ -1,5 +1,6 @@
 package com.example.demo.events;
 
+import com.example.demo.dto.EventDto;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 

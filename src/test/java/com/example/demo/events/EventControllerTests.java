@@ -1,8 +1,11 @@
 package com.example.demo.events;
 
 import com.example.demo.common.TestDescription;
+import com.example.demo.dto.EventDto;
+import com.example.demo.models.Event;
+import com.example.demo.models.EventStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hamcrest.Matchers;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
