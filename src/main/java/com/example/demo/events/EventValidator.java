@@ -28,19 +28,18 @@ public class EventValidator {
         }
 
         // TODO CloseEnrollmentDateTime
-        LocalDateTime closeEnrollmentDataTime = eventDto.getCloseEnrollmentDateTime();
-        if (closeEnrollmentDataTime.isAfter(eventDto.getBeginEventDateTime()) ||
-        closeEnrollmentDataTime.isBefore(eventDto.getBeginEnrollmentDateTime())||
-        closeEnrollmentDataTime.isAfter(eventDto.getEndEventDateTime())) {
-            errors.rejectValue("closeEnrollmentDataTime", "wrongValue", "closeEnrollmentDataTime is wrong");
-        }
-
-        LocalDateTime beginEnrollmentDateTime = eventDto.getBeginEnrollmentDateTime();
-        if (beginEnrollmentDateTime.isAfter(eventDto.getEndEventDateTime()) ||
-        beginEnrollmentDateTime.isAfter(eventDto.getCloseEnrollmentDateTime()) ||
-        beginEnrollmentDateTime.isAfter(eventDto.getBeginEventDateTime())) {
-            errors.rejectValue("beginEnrollmentDateTime", "wrongValue", "beginEnrollmentDateTime is wrong");
-        }
-        // 검증
+//        LocalDateTime closeEnrollmentDataTime = eventDto.getCloseEnrollmentDateTime();
+//        if (closeEnrollmentDataTime.isAfter(eventDto.getBeginEventDateTime()) ||
+//        closeEnrollmentDataTime.isBefore(eventDto.getBeginEnrollmentDateTime())||
+//        closeEnrollmentDataTime.isAfter(eventDto.getEndEventDateTime())) {
+//            errors.rejectValue("closeEnrollmentDataTime", "wrongValue", "closeEnrollmentDataTime is wrong");
+//        }
+//
+//        LocalDateTime beginEnrollmentDateTime = eventDto.getBeginEnrollmentDateTime();
+//        if (beginEnrollmentDateTime.isAfter(eventDto.getEndEventDateTime()) ||
+//        beginEnrollmentDateTime.isAfter(eventDto.getCloseEnrollmentDateTime()) ||
+//        beginEnrollmentDateTime.isAfter(eventDto.getBeginEventDateTime())) {
+//            errors.rejectValue("beginEnrollmentDateTime", "wrongValue", "beginEnrollmentDateTime is wrong");
+//        }
     }
 }
