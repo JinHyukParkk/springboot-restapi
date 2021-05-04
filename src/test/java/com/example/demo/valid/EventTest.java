@@ -1,4 +1,4 @@
-package com.example.demo.events;
+package com.example.demo.valid;
 
 import com.example.demo.models.Event;
 import junitparams.JUnitParamsRunner;

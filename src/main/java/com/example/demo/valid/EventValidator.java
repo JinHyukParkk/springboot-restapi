@@ -1,4 +1,4 @@
-package com.example.demo.events;
+package com.example.demo.valid;
 
 import com.example.demo.dto.EventDto;
 import org.springframework.stereotype.Component;
