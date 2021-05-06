@@ -3,11 +3,12 @@ package com.example.demo.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.lang.annotation.Target;
 import java.time.LocalDateTime;
 
 @Builder @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter @EqualsAndHashCode(of = "id")
-@Entity
+@Entity @Table(name = "event")
 public class Event {
     @Id @GeneratedValue
     private Integer id;
