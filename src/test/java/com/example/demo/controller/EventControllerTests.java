@@ -123,6 +123,7 @@ public class EventControllerTests {
                         )
                 ));
     }
+ㅎ
 
     @Test
     @TestDescription("입력 받을 수 없는 값을 사용하는 경우 에러가 발생하는 테스트")
