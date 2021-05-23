@@ -34,10 +34,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.modelmapper:modelmapper:2.4.0'
 
-    implementation 'io.rest-assured:rest-assured:4.3.2'
-    implementation 'io.rest-assured:json-path:4.3.2'
-    compile group: 'com.sun.xml.bind', name: 'jaxb-osgi', version: '2.3.2'
-
     compile 'org.springframework.restdocs:spring-restdocs-restassured'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'

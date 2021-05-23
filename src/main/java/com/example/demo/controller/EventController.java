@@ -6,6 +6,7 @@ import com.example.demo.repository.EventRepository;
 import com.example.demo.valid.EventValidator;
 import com.example.demo.resource.EventResource;
 import org.modelmapper.ModelMapper;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +58,9 @@ public class EventController {
         EventResource eventResource = new EventResource(event);
         eventResource.add(linkTo(EventController.class).withRel("query-events"));
         eventResource.add(selfLinkBuilder.withRel("update-event"));
+
+        Link link = Link.of("/docs/index.html#resources-events-create");
+        eventResource.add(link.withRel("profile"));
         return ResponseEntity.created(createdUri).body(eventResource);
     }
 }
