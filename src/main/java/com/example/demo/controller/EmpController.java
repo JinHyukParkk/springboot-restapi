@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("emp")
 public class EmpController {
 
-
     @GetMapping(value = "/list", produces = MediaTypes.HAL_JSON_VALUE)
     public String test() {
         return "test";
