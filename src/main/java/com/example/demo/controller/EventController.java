@@ -60,7 +60,7 @@ public class EventController {
         eventResource.add(selfLinkBuilder.withRel("update-event"));
 
         Link link = Link.of("/docs/index.html#resources-events-create");
-        eventResource.add(link.withRel("profile"));
+        eventResource.add(link.withRel( "profile"));
         return ResponseEntity.created(createdUri).body(eventResource);
     }
 }
