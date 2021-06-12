@@ -31,6 +31,6 @@ public class IndexControllerTest {
     public void index() throws Exception {
         this.mockMvc.perform(get("/api/"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("_links.events").exists())
+                .andExpect(jsonPath("_links.events").exists());
     }
 }
