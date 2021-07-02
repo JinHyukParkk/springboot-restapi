@@ -13,6 +13,8 @@ public class ErrorsSerializer extends JsonSerializer<Errors> {
 
     @Override
     public void serialize(Errors errors, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+        // 스프링 부트 2.3 으로 올라가면서 Jackson 라이브러리가 더 이상 Array부터 만드는걸 허용하지 않음
+        gen.writeFieldName("errors");
         gen.writeStartArray();
         errors.getFieldErrors().forEach(e -> {
             try {
@@ -43,5 +45,6 @@ public class ErrorsSerializer extends JsonSerializer<Errors> {
                 ioException.printStackTrace();
             }
         });
+        gen.writeEndArray();
     }
 }

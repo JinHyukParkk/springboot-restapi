@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.common.ErrorsResource;
 import com.example.demo.models.Event;
 import com.example.demo.dto.EventDto;
 import com.example.demo.repository.EventRepository;
@@ -41,12 +42,12 @@ public class EventController {
     @PostMapping
     public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors) {
         if (errors.hasErrors()) {
-            return ResponseEntity.badRequest().body(errors);
+            return badRequest(errors);
         }
 
         eventValidator.validate(eventDto, errors);
         if (errors.hasErrors()) {
-            return ResponseEntity.badRequest().body(errors);
+            return badRequest(errors);
         }
 
         Event event = modelMapper.map(eventDto, Event.class);
@@ -62,5 +63,9 @@ public class EventController {
         Link link = Link.of("/docs/index.html#resources-events-create");
         eventResource.add(link.withRel( "profile"));
         return ResponseEntity.created(createdUri).body(eventResource);
+    }
+
+    private ResponseEntity badRequest(Errors errors) {
+        return ResponseEntity.badRequest().body(ErrorsResource.modelOf(errors));
     }
 }
