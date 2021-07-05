@@ -190,4 +190,10 @@ public class EventControllerTests {
                 .andExpect(jsonPath("errors[0].code").exists())
                 .andExpect(jsonPath("_links.index").exists());
     }
+
+    @Test
+    @TestDescription("")
+    public void c() {
+
+    }
 }
