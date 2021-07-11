@@ -5,6 +5,8 @@ import com.example.demo.common.TestDescription;
 import com.example.demo.dto.EventDto;
 import com.example.demo.models.Event;
 import com.example.demo.models.EventStatus;
+import com.example.demo.repository.EventRepository;
+import com.example.demo.resource.EventResource;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.Test;
@@ -22,6 +24,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
+import java.util.stream.IntStream;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.*;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
@@ -45,6 +48,9 @@ public class EventControllerTests {
 
     @Autowired
     ObjectMapper objectMapper;
+
+    @Autowired
+    EventRepository eventRepository;
 
     @Test
     @TestDescription("정상적으로 이벤트를 생성하는 테스트")
@@ -192,8 +198,15 @@ public class EventControllerTests {
     }
 
     @Test
-    @TestDescription("")
-    public void c() {
+    @TestDescription("30개의 이벤트를 10개씩 두번째 페이지 조회하기")
+    public void quertEvents() throws Exception {
+        // Given(
+        IntStream.range(0, 30).forEach(i -> {
+            this.generateEvent(i);
+        });
+    }
 
+    private void generateEvent(int i) {
+        Event event = Event.builder().build();
     }
 }
