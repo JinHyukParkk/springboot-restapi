@@ -6,7 +6,6 @@ import com.example.demo.dto.EventDto;
 import com.example.demo.models.Event;
 import com.example.demo.models.EventStatus;
 import com.example.demo.repository.EventRepository;
-import com.example.demo.resource.EventResource;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.Test;
@@ -219,12 +218,41 @@ public class EventControllerTests {
                 .andDo(document("query-events"));
     }
 
-    private void generateEvent(int index) {
+    private Event generateEvent(int index) {
         Event event = Event.builder()
                 .name("event " + index)
                 .description("test evnt")
                 .build();
 
-        this.eventRepository.save(event);
+        return this.eventRepository.save(event);
     }
+
+    @Test
+    @TestDescription("기존의 이벤트를 하나 조회하기")
+    public void getEvent() throws Exception {
+        // Given
+        Event event = this.generateEvent(100);
+
+        // When & Then
+        this.mockMvc.perform(get("/api/events/{id}", event.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").exists())
+                .andExpect(jsonPath("id").exists())
+                .andExpect(jsonPath("_links.self").exists())
+                .andExpect(jsonPath("_links.profile").exists())
+                .andDo(document("get-an-event"));
+    }
+
+    @Test
+    @TestDescription("없는 이벤트는 조회했을 때 404 응답받기")
+    public void getEvent404() throws Exception {
+        // Given
+        Event event = this.generateEvent(100);
+
+        // When & Then
+        this.mockMvc.perform(get("/api/events/11883", event.getId()))
+                .andExpect(status().isNotFound());
+    }
+
+
 }
