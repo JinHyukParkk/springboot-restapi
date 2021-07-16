@@ -90,6 +90,14 @@ public class EventController {
         return ResponseEntity.ok(eventResource);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity updateEvent(@PathVariable Integer id,
+                                      @RequestBody @Valid EventDto eventDto,
+                                      Errors errors) {
+
+    }
+
+
     private ResponseEntity badRequest(Errors errors) {
         return ResponseEntity.badRequest().body(ErrorsResource.modelOf(errors));
     }
