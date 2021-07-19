@@ -7,9 +7,7 @@ import com.example.demo.models.Event;
 import com.example.demo.models.EventStatus;
 import com.example.demo.repository.EventRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.junit.Test;
-import org.junit.jupiter.params.shadow.com.univocity.parsers.common.input.ExpandingCharAppender;
 import org.junit.runner.RunWith;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,10 +73,10 @@ public class EventControllerTests {
                 .build();
 
         mockMvc.perform(post("/api/events/")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .accept(MediaTypes.HAL_JSON)
-                    .content(objectMapper.writeValueAsString(event))
-                    )
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaTypes.HAL_JSON)
+                .content(objectMapper.writeValueAsString(event))
+        )
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("id").exists())
@@ -171,9 +169,9 @@ public class EventControllerTests {
         EventDto eventDto = EventDto.builder().build();
 
         this.mockMvc.perform(post("/api/events")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(this.objectMapper.writeValueAsString(eventDto)))
-                    .andExpect(status().isBadRequest());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto)))
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -211,10 +209,10 @@ public class EventControllerTests {
 
         // When
         this.mockMvc.perform(get("/api/events")
-                    .param("page", "1")
-                    .param("size", "10")
-                    .param("sort", "name,DESC")
-                )
+                .param("page", "1")
+                .param("size", "10")
+                .param("sort", "name,DESC")
+        )
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("page").exists())
@@ -283,13 +281,13 @@ public class EventControllerTests {
 
         // Whem & Then
         this.mockMvc.perform(put("/api/events/{id}", event.getId())
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content(this.objectMapper.writeValueAsString(eventDto))
-                    )
-                    .andDo(print())
-                    .andExpect(status().isOk())
-                    .andExpect(jsonPath("name").value(eventName))
-                    .andExpect(jsonPath("_Links.self").exists());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto))
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").value(eventName))
+                .andExpect(jsonPath("_Links.self").exists());
     }
 
     @Test
@@ -319,9 +317,9 @@ public class EventControllerTests {
 
         // Whem & Then
         this.mockMvc.perform(put("/api/events/{id}", event.getId())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(this.objectMapper.writeValueAsString(eventDto))
-                )
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(eventDto))
+        )
                 .andDo(print())
                 .andExpect(status().isBadRequest());
     }
