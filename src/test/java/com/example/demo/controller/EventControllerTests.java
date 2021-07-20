@@ -222,26 +222,6 @@ public class EventControllerTests {
                 .andDo(document("query-events"));
     }
 
-    private Event generateEvent(int index) {
-        Event event = Event.builder()
-                .name("Spring")
-                .description("Rest Api - Springboot")
-                .beginEnrollmentDateTime(LocalDateTime.of(2021, 04, 16, 01, 29))
-                .closeEnrollmentDateTime(LocalDateTime.of(2021, 04, 17, 01, 30))
-                .beginEventDateTime(LocalDateTime.of(2021, 04, 16, 01, 29))
-                .endEventDateTime(LocalDateTime.of(2021, 04, 17, 01, 30))
-                .basePrice(100)
-                .maxPrice(200)
-                .limitOfEnrollment(100)
-                .location("태평역")
-                .free(false)
-                .offline(true)
-                .eventStatus(EventStatus.DRAFT)
-                .build();
-
-        return this.eventRepository.save(event);
-    }
-
     @Test
     @TestDescription("기존의 이벤트를 하나 조회하기")
     public void getEvent() throws Exception {
@@ -287,12 +267,13 @@ public class EventControllerTests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value(eventName))
-                .andExpect(jsonPath("_Links.self").exists());
+                .andExpect(jsonPath("_links.self").exists())
+                .andDo(document("update-event"));
     }
 
     @Test
     @TestDescription("입력값이 잘못된 경우에 이벤트를 수정 실패")
-    public void updateEvent404_Empty() throws Exception {
+    public void updateEvent400_Empty() throws Exception {
         //Given
         Event event = this.generateEvent(200);
         EventDto eventDto = new EventDto();
@@ -308,7 +289,7 @@ public class EventControllerTests {
 
     @Test
     @TestDescription("입력값이 잘못된 경우에 이벤트를 수정 실패")
-    public void updateEvent404_Wrong() throws Exception {
+    public void updateEvent400_Wrong() throws Exception {
         //Given
         Event event = this.generateEvent(200);
         EventDto eventDto = this.modelMapper.map(event, EventDto.class);
@@ -330,15 +311,33 @@ public class EventControllerTests {
         //Given
         Event event = this.generateEvent(200);
         EventDto eventDto = this.modelMapper.map(event, EventDto.class);
-        eventDto.setBasePrice(20000);
-        eventDto.setMaxPrice(1000);
 
         // Whem & Then
-        this.mockMvc.perform(put("/api/events/45t634ds", event.getId())
+        this.mockMvc.perform(put("/api/events/45t6341231ds")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(eventDto))
         )
                 .andDo(print())
                 .andExpect(status().isNotFound());
+    }
+
+    private Event generateEvent(int index) {
+        Event event = Event.builder()
+                .name("Spring")
+                .description("Rest Api - Springboot")
+                .beginEnrollmentDateTime(LocalDateTime.of(2021, 04, 16, 01, 29))
+                .closeEnrollmentDateTime(LocalDateTime.of(2021, 04, 17, 01, 30))
+                .beginEventDateTime(LocalDateTime.of(2021, 04, 16, 01, 29))
+                .endEventDateTime(LocalDateTime.of(2021, 04, 17, 01, 30))
+                .basePrice(100)
+                .maxPrice(200)
+                .limitOfEnrollment(100)
+                .location("태평역")
+                .free(false)
+                .offline(true)
+                .eventStatus(EventStatus.DRAFT)
+                .build();
+
+        return this.eventRepository.save(event);
     }
 }
