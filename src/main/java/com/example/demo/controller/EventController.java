@@ -64,7 +64,8 @@ public class EventController {
         eventResource.add(selfLinkBuilder.withRel("update-event"));
 
         Link link = Link.of("/docs/index.html#resources-events-create");
-        eventResource.add(link.withRel( "profile"));
+        eventResource.add(link.withRel("profile"));
+
         return ResponseEntity.created(createdUri).body(eventResource);
     }
 
@@ -119,7 +120,6 @@ public class EventController {
 
         return ResponseEntity.ok(eventResource);
     }
-
 
     private ResponseEntity badRequest(Errors errors) {
         return ResponseEntity.badRequest().body(ErrorsResource.modelOf(errors));

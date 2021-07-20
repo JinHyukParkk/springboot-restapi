@@ -313,7 +313,7 @@ public class EventControllerTests {
         EventDto eventDto = this.modelMapper.map(event, EventDto.class);
 
         // Whem & Then
-        this.mockMvc.perform(put("/api/events/45t6341231ds")
+        this.mockMvc.perform(put("/api/events/11883")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(eventDto))
         )
