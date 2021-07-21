@@ -12,8 +12,8 @@ public class IndexController {
 
     @GetMapping("/api")
     public RepresentationModel index() {
-        var index = new RepresentationModel<>();
-        index.add(linkTo(EventController.class).withRel("event"));
+        var index = new RepresentationModel();
+        index.add(linkTo(EventController.class).withRel("events"));
         return index;
     }
 }
