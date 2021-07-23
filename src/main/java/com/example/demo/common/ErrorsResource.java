@@ -1,6 +1,6 @@
 package com.example.demo.common;
 
-import com.example.demo.controller.IndexController;
+import com.example.demo.index.controller.IndexController;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.validation.Errors;
 
