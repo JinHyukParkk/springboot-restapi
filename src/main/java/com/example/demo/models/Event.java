@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.example.demo.accounts.Account;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,6 +28,9 @@ public class Event {
     private boolean free;
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus = EventStatus.DRAFT;
+
+    @ManyToOne
+    private Account manager;
 
     // free, offline 여부 체크
     public void update() {

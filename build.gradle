@@ -24,6 +24,7 @@ ext {
 }
 
 dependencies {
+    implementation 'org.projectlombok:lombok:1.18.18'
     asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 
     compile 'org.springframework.restdocs:spring-restdocs-restassured'
