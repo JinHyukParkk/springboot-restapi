@@ -175,6 +175,7 @@ public class EventControllerTests extends BaseControllerTest {
                 .andExpect(jsonPath("errors[0].defaultMessage").exists())
                 .andExpect(jsonPath("errors[0].code").exists())
                 .andExpect(jsonPath("_links.index").exists());
+
     }
 
     @Test
