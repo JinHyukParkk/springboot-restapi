@@ -25,6 +25,7 @@ import java.util.Optional;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 
+
 @Controller
 @RequestMapping(value = "/api/events", produces = MediaTypes.HAL_JSON_VALUE)
 public class EventController {
@@ -41,6 +42,12 @@ public class EventController {
         this.eventValidator = eventValidator;
     }
 
+    /**
+     * create Event
+     * @param eventDto
+     * @param errors
+     * @return ResponseEntity
+     */
     @PostMapping
     public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors) {
         if (errors.hasErrors()) {
