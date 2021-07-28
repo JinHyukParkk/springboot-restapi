@@ -3,6 +3,7 @@ package com.example.demo.configs;
 import com.example.demo.accounts.Account;
 import com.example.demo.accounts.AccountRole;
 import com.example.demo.accounts.AccountService;
+import com.example.demo.common.AppProperties;
 import com.example.demo.common.BaseControllerTest;
 import com.example.demo.common.TestDescription;
 import org.junit.Test;
@@ -21,13 +22,19 @@ public class AuthServerConfigTest extends BaseControllerTest {
     @Autowired
     AccountService accountService;
 
+    @Autowired
+    AppProperties appProperties;
+
     @Test
     @TestDescription("인증 토큰을 발급 받는 테스트")
     public void getAuthToken() throws Exception {
         // Given
-        String username = "hyuk@email.com";
-        String password = "hyuk";
+        String username = appProperties.getUserUsername();
+        String password = appProperties.getUserPassword();
 
+        /*
+         *     property로 관리하고 있기 때문에 아래 account 주석
+         */
         Account hyukAccount = Account.builder()
                 .email(username)
                 .password(password)
@@ -35,11 +42,8 @@ public class AuthServerConfigTest extends BaseControllerTest {
                 .build();
         this.accountService.saveAccount(hyukAccount);
 
-        String clientId = "test";
-        String clientSecret = "pass";
-
        this.mockMvc.perform(post("/oauth/token")
-               .with(httpBasic(clientId, clientSecret))
+               .with(httpBasic(appProperties.getClientId(), appProperties.getClientSecret()))
                .param("username", username)
                .param("password", password)
                .param("grant_type", "password")
