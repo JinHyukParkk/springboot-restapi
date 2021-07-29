@@ -53,7 +53,7 @@ public class AppConfig {
                         .password(appProperties.getUserPassword())
                         .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
                         .build();
-                accountService.saveAccount(admin);
+                accountService.saveAccount(user);
             }
         };
     }

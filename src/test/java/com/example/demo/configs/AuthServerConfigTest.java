@@ -32,9 +32,6 @@ public class AuthServerConfigTest extends BaseControllerTest {
         String username = appProperties.getUserUsername();
         String password = appProperties.getUserPassword();
 
-        /*
-         *     property로 관리하고 있기 때문에 아래 account 주석
-         */
         Account hyukAccount = Account.builder()
                 .email(username)
                 .password(password)

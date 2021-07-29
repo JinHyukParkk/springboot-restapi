@@ -49,16 +49,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 기본 정적 파일들 무시
         web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-            .anonymous()
-                .and()
-            .formLogin()
-                .and()
-            .authorizeRequests()
-                .mvcMatchers(HttpMethod.GET, "/api/**").authenticated()
-                .anyRequest().authenticated();
-    }
 }
