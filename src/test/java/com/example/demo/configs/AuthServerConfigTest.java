@@ -1,15 +1,11 @@
 package com.example.demo.configs;
 
-import com.example.demo.accounts.Account;
-import com.example.demo.accounts.AccountRole;
 import com.example.demo.accounts.AccountService;
 import com.example.demo.common.AppProperties;
-import com.example.demo.common.BaseControllerTest;
+import com.example.demo.common.BaseTest;
 import com.example.demo.common.TestDescription;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Set;
 
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
@@ -17,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class AuthServerConfigTest extends BaseControllerTest {
+public class AuthServerConfigTest extends BaseTest {
 
     @Autowired
     AccountService accountService;
@@ -31,13 +27,6 @@ public class AuthServerConfigTest extends BaseControllerTest {
         // Given
         String username = appProperties.getUserUsername();
         String password = appProperties.getUserPassword();
-
-        Account hyukAccount = Account.builder()
-                .email(username)
-                .password(password)
-                .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
-                .build();
-        this.accountService.saveAccount(hyukAccount);
 
        this.mockMvc.perform(post("/oauth/token")
                .with(httpBasic(appProperties.getClientId(), appProperties.getClientSecret()))

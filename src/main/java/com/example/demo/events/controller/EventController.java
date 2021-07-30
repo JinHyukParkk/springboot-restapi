@@ -1,7 +1,6 @@
 package com.example.demo.events.controller;
 
 import com.example.demo.accounts.Account;
-import com.example.demo.accounts.AccountAdapter;
 import com.example.demo.accounts.CurrentUser;
 import com.example.demo.common.ErrorsResource;
 import com.example.demo.events.dto.EventDto;
@@ -19,7 +18,6 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -79,8 +77,7 @@ public class EventController {
         eventResource.add(linkTo(EventController.class).withRel("query-events"));
         eventResource.add(selfLinkBuilder.withRel("update-event"));
 
-        Link link = Link.of("/docs/index.html#resources-events-create");
-        eventResource.add(link.withRel("profile"));
+        eventResource.add(Link.of("/docs/index.html#resources-events-create").withRel("profile"));
 
         return ResponseEntity.created(createdUri).body(eventResource);
     }

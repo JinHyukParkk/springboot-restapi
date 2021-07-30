@@ -1,6 +1,8 @@
 package com.example.demo.events.models;
 
 import com.example.demo.accounts.Account;
+import com.example.demo.accounts.AccountSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,6 +31,7 @@ public class Event {
     private EventStatus eventStatus = EventStatus.DRAFT;
 
     @ManyToOne
+    @JsonSerialize(using = AccountSerializer.class)
     private Account manager;
 
     // free, offline 여부 체크
